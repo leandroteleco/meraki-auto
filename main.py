@@ -404,14 +404,14 @@ def add_GP_FW_Rules_config():
 
     print("Given Dataframe :\n", df)
     for ind in df.index:
-        print(df['ID'][ind], df['Policy'][ind], df['Protocol'][ind], df['Destination'][ind])
+        print(df['ID'][ind], df['Policy'][ind], df['Protocol'][ind], df['Destination'][ind], df['Port'][ind], df['Comment'][ind])
+        info_FW_Rule = {'comment': df['Comment'][ind], 'policy': df['Policy'][ind], 'protocol': df['Protocol'][ind], 'destPort': df['Port'][ind], 'destCidr': df['Destination'][ind]}
+        info_GP_FW_Rules_List.append(info_FW_Rule)
 
-
-
-
+    info_firewallAndTrafficShaping = {'l3FirewallRules': info_GP_FW_Rules_List }
 
     try:
-        response = dashboard.networks.updateNetworkGroupPolicy(info_network_id, info_GP_id, firewallAndTrafficShaping={'l3FirewallRules': [{'comment': info_GP_FW_Rule_comment, 'policy': info_GP_FW_Rule_policy, 'protocol': info_GP_FW_Rule_protocol, 'destPort': info_GP_FW_Rule_destPort, 'destCidr': info_GP_FW_Rule_destCIDR}] } )
+        response = dashboard.networks.updateNetworkGroupPolicy(info_network_id, info_GP_id, firewallAndTrafficShaping=info_firewallAndTrafficShaping )
         message = '¡Configuración aplicada con éxito!'
     except APIError as e:
         print(f"Lo sentimos, ha ocurrido un error al intentar cargar la regla: {info_GP_FW_Rule_policy} | {info_GP_FW_Rule_protocol} | {info_GP_FW_Rule_destCIDR} | {info_GP_FW_Rule_destPort} | {info_GP_FW_Rule_comment} en la sede {info_network}")
