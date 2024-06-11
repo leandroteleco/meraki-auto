@@ -27,7 +27,8 @@ load_dotenv()
 
 JOB_ORDER_EXCEL_NAME = 'excel.xlsx'
 API_KEY = os.getenv('MERAKI_DASHBOARD_API_KEY')
-MERAKI_ORGANIZATION_ID = os.getenv('MERAKI_ORGANIZATION_ID')
+
+
 
 
 
@@ -50,6 +51,18 @@ user_data = dict()
 
 # Initialize the Meraki Dashboard connection.
 dashboard = meraki.DashboardAPI(API_KEY, suppress_logging=True)
+
+
+print("Number of organizations: ")
+print( len(dashboard.organizations.getOrganizations()))
+
+
+if len(dashboard.organizations.getOrganizations()) == 1 :
+    MERAKI_ORGANIZATION_ID = dashboard.organizations.getOrganizations()[0]["id"]
+    print(MERAKI_ORGANIZATION_ID)
+else:
+    MERAKI_ORGANIZATION_ID = os.getenv('MERAKI_ORGANIZATION_ID')
+
 
 
 
