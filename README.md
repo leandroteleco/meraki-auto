@@ -55,7 +55,7 @@ When the installation is finished, we will write in the console "python -m venv 
 
 Next, we will write the following code "source venv\Scripts\activate", this will activate the python virtualization environment.
 
-### Step 8: Meraki-Auto Initial Setup ###
+### Step 6: Meraki-Auto Initial Setup ###
 
 Enter the command "pip install -r requirements.txt" in the console, this will install all the dependencies (Python modules and libraries) necessary to run the program. This step may take several minutes, please be patient.
 
