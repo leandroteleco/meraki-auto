@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h1 class="display-1">{% block title %} Meraki-Auto {% endblock %}</h1>
+    <p ></p>
+    <p></p>
+    <div class="card text-bg-success mb-3" style="max-width: 30rem;">
+        <div class="card-header" style="max-width: 60rem;">CONFIGURACIÓN APLICADA</div>
+        <div class="card-body" style="max-width: 60rem;">
+
+
+
+          <a class="btn btn-primary" href="{{ url_for('index')}}" role="button">Volver al inicio</a>
+
+
+        </div>
+      </div>
+      
+
+</div>
+
+{% endblock %}

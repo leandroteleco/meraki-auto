@@ -1,14 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to Meraki-Auto !!{% endblock %}</h1>
 
+<div class="container-fluid">
 
-    <form action = "/success" method = "post" enctype="multipart/form-data">   
-        <input type="file" name="file" />   
-        <input type = "submit" value="Upload">   
-    </form>   
+    <h1 class="display-1">{% block title %} Meraki-Auto {% endblock %}</h1>
+    <p ></p>
+    <p></p>
+    <div class="card text-bg-success mb-3" style="max-width: 30rem;">
+        <div class="card-header">Información resumida de la red</div>
+        <div class="card-body">
+          <h5 class="card-title">Organización: {{info_organization_v}}</h5>
 
+          <p class="card-text">
+            Tráfico subido últimas 24 horas:
+            {{info_organization_clients_up_v}} Mb
+          </p>
+          <p class="card-text">
+            Tráfico descargado últimas 24 horas:
+            {{info_organization_clients_down_v}} Mb
+          </p>
+          <p class="card-text">
+            ------------------------------------
+          </p>
 
+          <p class="card-text">
+           
+            Sede:
+            {{info_networks_v}}
+          </p>
+          <p class="card-text">
+            Alertas (histórico):
+            {{info_alerts_v}}
+          </p>
+          
+        </div>
+      </div>
+      
+
+</div>
 
 {% endblock %}

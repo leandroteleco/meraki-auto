@@ -1,6 +1,22 @@
-h1 {
+h2 {
     border: 2px #eee solid;
-    color: brown;
+    color: rgb(32, 171, 78) 93.76%;
     text-align: center;
     padding: 10px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }

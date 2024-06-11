@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h1 class="display-1">{% block title %} Meraki-Auto {% endblock %}</h1>
+    <p ></p>
+    <p></p>
+    <div class="card text-bg-success mb-3" style="max-width: 60rem;">
+        <div class="card-header" style="max-width: 60rem;">Añadir reglas de firewall a Group Policy</div>
+        <div class="card-body" style="max-width: 60rem;">
+
+          <p>Fichero cargado correctamente</p> 
+          <p>Nombre de fichero: {{filename}}</p> 
+          <p>Nombre de la sede: {{info_network_v}}</p> 
+          <p>Nombre del Group Policy: {{info_GP_v}}</p> 
+          
+    
+          
+          <table class="table table-striped">
+            <tr>
+                {% for col in column_names %}
+                <th>{{col}}</th>
+                {% endfor %}
+            </tr>
+            {% for row in row_data %}
+            <tr>
+                {% for col, row_ in zip(column_names, row) %}
+                {% if col == link_column %}
+                <td>
+                    <b>
+                        {{ row_ }}
+                    </b>
+                </td>
+                {% else %}
+                <td>{{row_}}</td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        
+          </table>
+
+          <a class="btn btn-primary" href="{{ url_for('add_GP_FW_Rules_config')}}" role="button">Aplicar configuración</a>
+
+
+        </div>
+      </div>
+      
+
+</div>
+
+{% endblock %}

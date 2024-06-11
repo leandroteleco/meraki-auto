@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h1 class="display-1">{% block title %} Meraki-Auto {% endblock %}</h1>
+    <p ></p>
+    <p></p>
+    <div class="card text-bg-success mb-3" style="max-width: 30rem;">
+        <div class="card-header">Añadir reglas de firewall a Group Policy</div>
+        <div class="card-body">
+          <h5 class="card-title">Organización: {{info_organization_v}}</h5>
+
+          <div class="input-group mb-3">
+            <input type="file" class="form-control" id="inputGroupFile02">
+            <label class="input-group-text" for="inputGroupFile02">Cargar fichero</label>
+          </div>          
+
+        </div>
+      </div>
+      
+
+</div>
+
+{% endblock %}

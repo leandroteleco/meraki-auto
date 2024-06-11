@@ -1,6 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to Meraki-Auto {% endblock %}</h1>
-    <p>Esto es una web para ejecutar modificaciones y configuraciones masivas sobre redes con equipamiento Cisco Meraki. Actualmente se encuentra en una fase inicial de desarrollo.</p>
+   
+<div class="container-fluid">
+
+    <h1 class="display-1">{% block title %} Meraki-Auto {% endblock %}</h1>
+    <p ></p>
+    <p></p>
+    <div class="card text-bg-success mb-3" style="max-width: 30rem;">
+        <div class="card-header">About</div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text">
+            
+            Esto es una web para ejecutar modificaciones y configuraciones masivas sobre redes con equipamiento Cisco Meraki. Actualmente se encuentra en una fase inicial de desarrollo.
+
+          </p>
+
+          <p class="card-text">
+            
+            Para poder funcionar necesitarás usar Python 3.12 o superior con las siguientes librerías instaladas:
+            <pre>{{ content }}</pre>
+          </p>
+
+          <p class="card-text">
+            
+            Además deberás activar el acceso API en el Dashboard de Meraki (puedes seguir <a href="https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API">estas instrucciones</a> para obtener la API_KEY).
+
+          </p>
+
+        </div>
+      </div>
+      
+
+</div>
+
+
+
+
+
 {% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h1 class="display-1">{% block title %} Meraki-Auto {% endblock %}</h1>
+    <p ></p>
+    <p></p>
+    <div class="card text-bg-success mb-3" style="max-width: 30rem;">
+        <div class="card-header">Añadir reglas de firewall a Group Policy</div>
+        <div class="card-body">
+
+          <form action = "/add-GP-FW-Rules-read" method = "post" enctype="multipart/form-data"> 
+            <div class="mb-3">
+              <input class="form-control" type="file" id="formFile" name="file">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Leer fichero</button>
+          </form>
+
+        </div>
+      </div>
+      
+
+</div>
+
+{% endblock %}
