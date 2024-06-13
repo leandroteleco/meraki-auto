@@ -63,6 +63,8 @@ When you're done, open the .env file located in the "meraki-auto" folder using n
 
 If you have more than 1 organization in your account, you'll need to change the text "YOUR_ORG_ID" to your organization's ID.
 
+If you are going to run the application on a PC that uses a corporate proxy such as Zscaler, you will need to obtain the certificate from your proxy. Also in that case you should set USE_PROXY to 1, and in PROXY_CERTIFICATE_FILE you should indicate the full path to the certificate you downloaded, similar to this: C:\\certfolder\\certfile.cer
+
 Save the changes and close the .env file.
 
 ### Step 7: Running the Meraki-Auto application ###
