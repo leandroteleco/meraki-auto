@@ -27,6 +27,8 @@ load_dotenv()
 
 JOB_ORDER_EXCEL_NAME = 'excel.xlsx'
 API_KEY = os.getenv('MERAKI_DASHBOARD_API_KEY')
+USE_PROXY = os.getenv('USE_PROXY')
+PROXY_CERTIFICATE_FILE = os.getenv ('PROXY_CERTIFICATE_FILE')
 
 
 # We'll also create a few reusable strings for later interactivity.
@@ -47,7 +49,10 @@ user_data = dict()
 
 
 # Initialize the Meraki Dashboard connection.
-dashboard = meraki.DashboardAPI(API_KEY, suppress_logging=True)
+if USE_PROXY == 1:
+    dashboard = meraki.DashboardAPI(API_KEY, suppress_logging=True, certificate_path=PROXY_CERTIFICATE_FILE)  # Connection with proxy
+else:
+    dashboard = meraki.DashboardAPI(API_KEY, suppress_logging=True) # Connection without proxy
 
 
 print("Number of organizations: ")
