@@ -29,9 +29,6 @@ JOB_ORDER_EXCEL_NAME = 'excel.xlsx'
 API_KEY = os.getenv('MERAKI_DASHBOARD_API_KEY')
 
 
-
-
-
 # We'll also create a few reusable strings for later interactivity.
 string_constants = dict()
 string_constants['CONFIRM'] = 'OK, are you sure you want to do this? This script does not have an "undo" feature.'
@@ -275,8 +272,6 @@ def load_excel(excel_name):
         excel_document = openpyxl.load_workbook(excel_name)
         print(excel_document)
         print(excel_document.sheetnames)
-        #print (excel_document['SSID '].values)
-        #for row in excel_document['SSID '].iter_rows(min_row=1, max_col=5, max_row=75, values_only=True): print(row)
         print ('Excel loaded! :)')
 
         return excel_document
@@ -291,25 +286,12 @@ def load_excel(excel_name):
 
 
 
-
-
-
-
-
 app = Flask(__name__)
 port = "5000"
 bootstrap = Bootstrap(app)
 app.secret_key = API_KEY
 app.config['SESSION_TYPE'] = 'filesystem'
 
-# Open a ngrok tunnel to the HTTP server
-#public_url = ngrok.connect(port).public_url
-#print(f""" * ngrok tunnel \'{public_url}\' -> \'http://127.0.0.1:{port}\'""")
-
-# Update any base URLs to use the public ngrok URL
-#app.config["BASE_URL"] = public_url
-
-# ... Update inbound traffic via APIs to use the public-facing ngrok URL
 
 # Define Flask routes
 @app.route("/")
@@ -358,19 +340,6 @@ def add_GP_FW_Rules_read():
         info_GP = job_order['GROUP POLICY']['B4'] # Sede
         session['info_network'] = info_network.value
         session['info_GP'] = info_GP.value
-        
-        #print(job_order['GROUP POLICY'].max_row)
-        #fw_rule_id = 0
-        #for row in job_order['GROUP POLICY'].iter_rows(min_row=7, max_row=job_order['GROUP POLICY'].max_row-3, min_col=1, max_col=6,values_only=False):
-        #    fw_rule_id = fw_rule_id + 1 # FW Rule 1
-        #    fw_rule_param = 0
-        #    for cell in row:
-        #        fw_rule_param = fw_rule_param + 1
-                #print ('Rule ID: ', rule_id ,'Type(cell.value): ',type(cell.value), " cell.value: ", cell.value, " cell.internal_value: ", cell.internal_value)
-                #print('Rule ID: ', fw_rule_id , 'Rule param: ', fw_rule_param , 'Valor: ', cell.value )
-                # tables=[df.to_html(classes='data', header="true", index=False)],
-                
-
 
         return render_template("add-GP-FW-Rules-read.html", filename=JOB_ORDER_EXCEL_NAME, info_network_v=info_network.value, info_GP_v=info_GP.value,  column_names=df.columns.values, row_data=list(df.values.tolist()), link_column="ID", zip=zip)
 
@@ -455,63 +424,6 @@ def about():
     with open("requirements.txt", "r") as f:
         content = f.read()
     return render_template('about.html', content=content)
-
-@app.route('/success', methods = ['POST'])
-def success():
-    if request.method == 'POST':
-        f = request.files['file']
-        f.save(f.filename)
-        JOB_ORDER_EXCEL_NAME = f.filename
-        print (JOB_ORDER_EXCEL_NAME)
-
-
-        job_order = load_excel(JOB_ORDER_EXCEL_NAME)
-
-        info_network = job_order['SSID ']['B3'] # Sede
-        info_ssid = job_order['SSID ']['B4']
-        info_ssid_visibility = job_order['SSID ']['B5']
-        info_ssid_access = job_order['SSID ']['B6']
-        info_ssid_security = job_order['SSID ']['C8']
-        info_ssid_password = job_order['SSID ']['C9']
-        info_ssid_dns = job_order['SSID ']['C34']
-        info_ssid_fw_rule_policy = job_order['SSID ']['A39']
-        info_ssid_fw_rule_protocol = job_order['SSID ']['B39']
-        info_ssid_fw_rule_destination = job_order['SSID ']['C39']
-        info_ssid_fw_rule_port = job_order['SSID ']['D39']
-        info_ssid_fw_rule_comment = job_order['SSID ']['E39']
-
-        info_network_v = info_network.value
-        info_ssid_v = info_ssid.value
-        info_ssid_visibility_v = info_ssid_visibility.value
-        info_ssid_access_v = info_ssid_access.value
-        info_ssid_security_v = info_ssid_security.value
-        info_ssid_password_v = info_ssid_password.value
-        info_ssid_dns_v = info_ssid_dns.value
-        info_ssid_fw_rule_policy_v = info_ssid_fw_rule_policy.value
-        info_ssid_fw_rule_protocol_v = info_ssid_fw_rule_protocol.value
-        info_ssid_fw_rule_destination_v = info_ssid_fw_rule_destination.value
-        info_ssid_fw_rule_port_v  = info_ssid_fw_rule_port.value     
-        info_ssid_fw_rule_comment_v= info_ssid_fw_rule_comment.value
-
-        print (info_network.value)
-        print (info_ssid.value)
-        print (info_ssid_visibility.value)
-        print (info_ssid_access.value)
-        print (info_ssid_security.value)
-        print (info_ssid_password.value)
-        print (info_ssid_dns.value)
-        print (info_ssid_fw_rule_policy.value)
-        print (info_ssid_fw_rule_protocol.value)
-        print (info_ssid_fw_rule_destination.value)
-        print (info_ssid_fw_rule_port.value)
-        print (info_ssid_fw_rule_comment.value)
-
-
-
-
-        return render_template("acknowledgement.html", name = f.filename, info_network_v=info_network_v, info_ssid_v = info_ssid_v, info_ssid_visibility_v = info_ssid_visibility_v, info_ssid_access_v = info_ssid_access_v, info_ssid_security_v = info_ssid_security_v, info_ssid_password_v = info_ssid_password_v, info_ssid_dns_v = info_ssid_dns_v, info_ssid_fw_rule_v = info_ssid_fw_rule_policy_v , info_ssid_fw_rule_protocol_v = info_ssid_fw_rule_protocol_v, info_ssid_fw_rule_destination_v = info_ssid_fw_rule_destination_v, info_ssid_fw_rule_port_v  = info_ssid_fw_rule_port_v, info_ssid_fw_rule_comment_v= info_ssid_fw_rule_comment_v)
-
-
 
 
 
